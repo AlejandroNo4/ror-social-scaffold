@@ -31,6 +31,8 @@ module ApplicationHelper
     end
   end
 
+  # rubocop:disable Style/GuardClause
+
   def btn_to_remove(user_to_remove, user_asking, str)
     if current_user == user_asking
       link_to str.to_s, remove_friends_path(id: user_to_remove.id), class: 'btn btn-danger ml-3',
@@ -44,6 +46,7 @@ module ApplicationHelper
               class: 'btn btn-success ml-3'
     end
   end
+  # rubocop:enable Style/GuardClause
 
   def like_or_dislike_btn(post)
     like = Like.find_by(post: post, user: current_user)
