@@ -67,17 +67,21 @@ Open `http://localhost:3000/` in your browser.
 
 ### Deployment
 
-TBA
+The project was deployed in Heroku. Feel free to check the live demo.
 
-## Authors
+## Author
 
-TBA
+👤 **Alejandro Guadalupe Contreras Rodriguez**
+
+- GitHub: [@AlejandroNo4](https://github.com/AlejandroNo4)
+- Twitter: [@Alejand80002666](https://twitter.com/alejand80002666)
+- LinkedIn: [Alejandro Contreras Rodriguez](https://www.linkedin.com/in/alejandro-contreras-rodriguez-b524821b5/)
 
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/AlejandroNo4/ror-social-scaffold/issues).
 
 ## Show your support
 
@@ -85,9 +89,7 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-TBA
+For a better understanding, I followed this tutorial from Codemy.com.
 
-## 📝 License
-
-TBA
+[- Friends App. ROR](https://www.youtube.com/watch?v=iF8caVyDi5g&list=PLCC34OHNcOtrk3BDsfZwf4GattdLoKCOF)
 
