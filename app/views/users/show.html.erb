@@ -1,5 +1,46 @@
 <section class="user-section">
-  <h2><%= "Name: #{@user.name}" %></h2>
+  <h2 class="mb-4"><%= @user.name %></h2>
+
+  <%= friendship_status(@user) %>
+
+  <h2 class="mb-3"><%= "Friends status" %></h2>
+
+  <h3 class="badge bg-primary rounded-pill text-light"> Total Friends (<%= @user.friends.count %>)</h3>
+  <ul class="list-group">
+    <% @user.friends.each do |friend| %>
+
+      <li class="list-group-item"> <%= friend.name %>
+        <%= btn_to_remove(friend, @user, "remove friend") %> 
+      </li>
+      
+    <% end %> 
+  </ul>
+
+  <h3 class="badge bg-primary rounded-pill text-light"> Pending Friends (<%= @user.pending_friends.count %>)</h3>
+  <ul class="list-group">
+    <% @user.pending_friends.each do |pending| %>
+    <li class="list-group-item"> <%= pending.name %>
+    
+    <%= btn_to_remove(pending, @user, "Cancel request") %>
+
+    </li>
+    <% end %> 
+  </ul>
+
+  <h3 class="badge bg-primary rounded-pill text-light"> Friend Requests (<%= @user.friend_requests.count %>)</h3>
+  <ul class="list-group">
+    <% current_user.friend_requests.each do |request_user| %>
+    <li class="list-group-item"> 
+    
+    <%= request_user.name %>
+
+    <%= btn_to_accept(request_user, @user, "Accept") %>
+    <%= btn_to_remove(request_user, @user, "Reject") %>
+
+    </li>
+    <% end %> 
+  </ul>
+
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">
