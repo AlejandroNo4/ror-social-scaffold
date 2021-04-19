@@ -9,7 +9,7 @@
 
 ## Live Demo
 
-TBA
+[Live Demo](https://railssocialscaffold.herokuapp.com/)
 
 
 ## Getting Started
