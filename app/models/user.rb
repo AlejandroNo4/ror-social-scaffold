@@ -13,19 +13,8 @@ class User < ApplicationRecord
   has_many :requested_friendships, foreign_key: 'requester_id', class_name: 'Friendship'
   has_many :received_friendships, foreign_key: 'receiver_id', class_name: 'Friendship'
 
-  #  has_many :friendships
-  #  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-
   def friends
-    requested_array = requested_friendships.map { |fr| fr.receiver if fr.status }
-    received_array = received_friendships.map { |fr| fr.requester if fr.status }
-    (requested_array + received_array).compact
-  end
-
-  def friendships
-    requested = requested_friendships
-    received = received_friendships
-    (requested + received)
+    received_friendships.map { |fr| fr.requester if fr.status }.compact
   end
 
   def pending_friends
@@ -36,10 +25,11 @@ class User < ApplicationRecord
     received_friendships.map { |fr| fr.requester unless fr.status }.compact
   end
 
-  def confirm_friend(user)
+  def confirm_friend(user, current_user)
     friendship = received_friendships.find { |fr| fr.requester == user }
     friendship.status = true
     friendship.save
+    Friendship.create!(receiver_id: user.id, requester_id: current_user.id, status: true)
   end
 
   def friend?(user)

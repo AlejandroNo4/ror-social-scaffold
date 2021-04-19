@@ -11,31 +11,16 @@ class FriendshipsController < ApplicationController
 
   def update
     requester = User.find params[:user_id]
-    if current_user.confirm_friend(requester)
-      redirect_back(fallback_location: users_path, notice: 'Friendship request accepted!')
-    else
-      redirect_back(fallback_location: users_path, notice: 'Friendship request denied!')
+    if current_user.confirm_friend(requester, current_user)
+      flash[:notice] = 'Request accepted!'
+      redirect_to request.referrer
     end
   end
 
-  def friendship_requests_delete(requester)
-    @friendship = requester.requested_friendships.select do |f|
-      f.receiver_id == current_user.id
-    end || requester.received_friendships.select do |f|
-             f.requester_id == current_user.id
-           end
-    @friendship
-  end
-
   def destroy
-    requester = User.find params[:id]
-    @friendship = current_user.requested_friendships.select do |f|
-      f.receiver_id == requester.id
-    end || current_user.received_friendships.select do |f|
-             f.receiver_id == requester.id
-           end
-    friendship_requests_delete(requester) unless @friendship.any?
-    @friendship.each(&:destroy)
+    @other_user = User.find params[:id]
+    @f_to_del = current_user.requested_friendships.where(requester_id: current_user.id) + @other_user.requested_friendships.where(requester_id: @other_user.id)
+    @f_to_del.each(&:destroy)
     flash[:notice] = 'Deleted succesfully'
     redirect_to request.referrer
   end
@@ -45,6 +30,6 @@ class FriendshipsController < ApplicationController
   def friendship_params
     { receiver_id: params[:receiver_id],
       requester_id: params[:requester_id],
-      status: false }
+      status: params[:status] }
   end
 end

@@ -18,7 +18,7 @@ module ApplicationHelper
     elsif requester.friend_requests.include?(receiver)
       'You have a friend request from this user'
     else
-      button_to 'Add friend', friendships_path(receiver_id: receiver.id, requester_id: requester.id),
+      button_to 'Add friend', friendships_path(receiver_id: receiver.id, requester_id: requester.id, status: false),
                 class: 'btn btn-primary'
     end
   end
